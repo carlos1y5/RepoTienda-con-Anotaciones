@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-jul-2014 15:21:40 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="modelo.TiendaProducto" table="tienda_producto" catalog="teide2014">
+        <id name="idProducto" type="java.lang.Integer">
+            <column name="idProducto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tiendaCategoria" class="modelo.TiendaCategoria" fetch="select">
+            <column name="idCategoria" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65535" />
+        </property>
+        <property name="foto" type="string">
+            <column name="foto" length="450" />
+        </property>
+        <property name="existencias" type="int">
+            <column name="existencias" not-null="true" />
+        </property>
+        <property name="precio" type="double">
+            <column name="precio" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+    <query name="findByNombre">
+        from TiendaProducto t where t.nombre= :nombre
+    </query>
+    <query name="findByPrecio">
+        from TiendaProducto t where t.precio &gt; :precio
+    </query>
+    <query name="findByExistencias">
+        from TiendaProducto t where t.existencias &lt; 1
+    </query>
+    
+</hibernate-mapping>

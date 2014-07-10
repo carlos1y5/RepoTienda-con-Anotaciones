@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-jul-2014 15:21:40 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="modelo.TiendaCategoria" table="tienda_categoria" catalog="teide2014">
+        <id name="idCategoria" type="java.lang.Integer">
+            <column name="idCategoria" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="icono" type="string">
+            <column name="icono" length="450" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65535" />
+        </property>
+        <set name="tiendaProductos" table="tienda_producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCategoria" not-null="true" />
+            </key>
+            <one-to-many class="modelo.TiendaProducto" />
+        </set>
+    </class>
+</hibernate-mapping>
